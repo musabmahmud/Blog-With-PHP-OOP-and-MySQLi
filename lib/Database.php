@@ -5,7 +5,6 @@ Class Database{
 	public $pass   = DB_PASS;
 	public $dbname = DB_NAME;
 	
-	
 	public $link;
 	public $error;
 	
@@ -22,11 +21,10 @@ Class Database{
 	 }
 	
 	// Select or Read data
-	
 	public function select($query){
 		$select_row = $this->link->query($query) or die($this->link->error.__LINE__);
 		if($select_row-> num_rows > 0){
-			return $result;
+			return $select_row;
 		} else {
 			return false;
 		}

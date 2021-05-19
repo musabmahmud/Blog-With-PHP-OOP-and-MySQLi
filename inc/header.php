@@ -1,3 +1,8 @@
+<?php 
+include "config/config.php";
+include "lib/database.php";
+include "helpers/format.php";
+?>
 <!DOCTYPE html>
 <html>
 <head>
