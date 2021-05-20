@@ -2,11 +2,20 @@
     <div class="samesidebar clear">
         <h2>Categories</h2>
         <ul>
-            <li><a href="#">Category One</a></li>
-            <li><a href="#">Category Two</a></li>
-            <li><a href="#">Category Three</a></li>
-            <li><a href="#">Category Four</a></li>
-            <li><a href="#">Category Five</a></li>
+            <?php
+            $query = "SELECT * FROM blog_category";
+            $post = $db->select($query);
+            if ($post) {
+                while ($result = $post->fetch_assoc()) {
+            ?>
+                <li><a href="posts.php?category=<?= $result['id'];?>"><?= $result['name'];?></a></li>
+            <?php }
+            } 
+            else{
+            ?>
+                 <li><a href="#">No related Categories</a></li>
+            <?php
+            }?>
         </ul>
     </div>
     <div class="samesidebar clear">

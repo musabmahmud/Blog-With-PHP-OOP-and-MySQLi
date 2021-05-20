@@ -3,6 +3,10 @@ include "config/config.php";
 include "lib/database.php";
 include "helpers/format.php";
 ?>
+<?php 
+$db = new Database();
+$format = new Format();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,8 +61,8 @@ $(window).load(function() {
 				<a href="#" target="_blank"><i class="fa fa-google-plus"></i></a>
 			</div>
 			<div class="searchbtn clear">
-			<form action="" method="post">
-				<input type="text" name="keyword" placeholder="Search keyword..."/>
+			<form action="search.php" method="get">
+				<input type="text" name="search" placeholder="Search keyword..."/>
 				<input type="submit" name="submit" value="Search"/>
 			</form>
 			</div>

@@ -1,12 +1,8 @@
 <?php include "inc/header.php"; ?>
 <?php
 
-$db = new Database();
-$format = new Format();
-
-
 $id = $_GET['id'];
-if (!isset($id) || $id == NULL) {
+if (!isset($id)) {
     header("Location : 404.php");
 }
 ?>
@@ -22,13 +18,24 @@ if (!isset($id) || $id == NULL) {
             ?>
                 <h2><?= $result['title']; ?></h2>
                 <h4><?= $format->formatDate($result['date']); ?>, By <?= $result['author']; ?></h4>
-                <img src="images/post2.png" alt="MyImage" />
+                <img src="images/<?= $result['image']; ?>" alt="MyImage" />
                 <p><?= $result['body']; ?></p>
-                <div class="relatedpost clear">
-                    <h2><?= $result['title']; ?></h2>
-                    <a href="#"><img src="images/<?= $result['image']; ?>" alt="post image" /></a>
-                </div>
-            <?php } ?>
+            <?php } else {
+                header("Location : 404.php");
+            } ?>
+            <div class="relatedpost clear">
+                <h2>Related Posts</h2>
+                <?php
+                $categoid = $result['catego'];
+                $relatedquery = "SELECT * FROM blog_post Where catego = '$categoid' limit 4";
+                $relatedpost = $db->select($relatedquery);
+                if ($relatedpost) {
+                    while ($relatedresult = $relatedpost->fetch_assoc()) {
+                ?>
+                        <a href="post.php?id=<?= $relatedresult['id']; ?>"><img src="images/<?= $relatedresult['image']; ?>" alt="post image" /></a>
+                <?php }
+                } ?>
+            </div>
         </div>
     </div>
     <?php include "inc/sidebar.php"; ?>

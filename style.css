@@ -414,6 +414,10 @@ margin:200px 0;
 }
 .items:hover .shadow{top:0}
 
+.about{
+  display: grid;
+}
+
 
 
 
