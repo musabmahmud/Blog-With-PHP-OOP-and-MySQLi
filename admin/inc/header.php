@@ -1,3 +1,22 @@
+<?php 
+include "../lib/Session.php"; 
+include "../lib/database.php"; 
+Session::checkSession();
+?>
+<?php
+include "../config/config.php";
+include "../helpers/format.php";
+
+$db = new Database();
+$format = new Format();
+?>
+<?php
+  //set headers to NOT cache a page
+  //header("Cache-Control: no-cache, must-revalidate"); 
+  //header("Pragma: no-cache"); 
+  //header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); 
+  //header("Cache-Control: max-age=2592000"); 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +41,12 @@
     <!-- END: load jquery -->
     <script type="text/javascript" src="js/table/table.js"></script>
     <script src="js/setup.js" type="text/javascript"></script>
-	 <script type="text/javascript">
+	<script type="text/javascript">
+         setTimeout(function() {
+            document.getElementById("login_msg").style.display = 'none';
+            document.getElementById("login_msg").Window.location.reload();
+        }, 300);
+        
         $(document).ready(function () {
             setupLeftMenu();
 		    setSidebarHeight();
@@ -43,16 +67,21 @@
                     <img src="img/livelogo.png" alt="Logo" />
 				</div>
 				<div class="floatleft middle">
-					<h1>Training with live project</h1>
-					<p>www.trainingwithliveproject.com</p>
+					<h1>My Blogging Website</h1>
+					<p>www.musabblog.com</p>
 				</div>
+                <?php
+                    if(isset($_GET['action']) && $_GET['action'] == "logout"){
+                        Session::destroy();
+                    }
+                ?>
                 <div class="floatright">
                     <div class="floatleft">
                         <img src="img/img-profile.jpg" alt="Profile Pic" /></div>
                     <div class="floatleft marginleft10">
                         <ul class="inline-ul floatleft">
                             <li>Hello Admin</li>
-                            <li><a href="#">Logout</a></li>
+                            <li><a href="?action=logout">Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -62,3 +91,4 @@
         </div>
         <div class="clear">
         </div>
+        

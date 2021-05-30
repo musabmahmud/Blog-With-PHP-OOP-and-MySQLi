@@ -10,6 +10,12 @@
             $text = $text . ".....";
             return $text;
         }
+        public function validate($data){
+            $date = trim($data);
+            $data = stripcslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
     }
     
 ?>

@@ -14,7 +14,15 @@
                 return false;
             }
         }
-        
+        public static function checkSession(){
+            self::init();
+            if(self::get("login") == false){
+                self::destroy();
+            }
+        }
+        public static function destroy(){
+            session_destroy();
+            header("Location: login.php");
+        }
     }
-
 ?>
